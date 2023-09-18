@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -41,22 +43,24 @@ require("lazy").setup({
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
-          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "typescript" },
-          sync_install = false,
-          highlight = { enable = true },
-          indent = { enable = true },  
-        })
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "typescript" },
+        sync_install = false,
+        highlight = { enable = true },
+        indent = { enable = true },  
+      })
     end
- }
+  },
+  {
+    'nvim-telescope/telescope.nvim', tag = '0.1.3',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    keys = {
+      {"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files"},
+      {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find Text"},
+      {"<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers"},
+      {"<leader>fh", "<cmd>Telescope help_tabs<cr>", desc = "Find Help"}
+    },
+  } 
 })
-
-
-
-
-
-
-
-
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -72,5 +76,4 @@ vim.opt.wrap = false
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
-
 
