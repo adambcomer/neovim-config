@@ -59,8 +59,122 @@ require("lazy").setup({
       {"<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers"},
       {"<leader>fh", "<cmd>Telescope help_tabs<cr>", desc = "Find Help"}
     },
-  } 
+  },
+  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x', lazy = true, config = false},
+
+  --- Uncomment these if you want to manage LSP servers from neovim
+  {'williamboman/mason.nvim'},
+  {'williamboman/mason-lspconfig.nvim'},
+
+  -- LSP Support
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      {'hrsh7th/cmp-nvim-lsp'},
+    },
+  },
+
+  -- Autocompletion
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      {'L3MON4D3/LuaSnip'},
+    }
+  }
+  --{
+  --  "williamboman/mason.nvim",
+  --  cmd = "Mason",
+  --  keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+  --  build = ":MasonUpdate",
+  --  opts = {
+  --    ensure_installed = {
+  --      "stylua",
+  --      "lua-language-server",
+  --    },
+  --  },
+  --  ---@param opts MasonSettings | {ensure_installed: string[]}
+  --  config = function(_, opts)
+  --    require("mason").setup(opts)
+  --    local mr = require("mason-registry")
+  --    local function ensure_installed()
+  --      for _, tool in ipairs(opts.ensure_installed) do
+  --        local p = mr.get_package(tool)
+  --        if not p:is_installed() then
+  --          p:install()
+  --        end
+  --      end
+  --    end
+  --    if mr.refresh then
+  --      mr.refresh(ensure_installed)
+  --    else
+  --      ensure_installed()
+  --    end
+  --  end,
+  --},
+  --{ "williamboman/mason-lspconfig.nvim" },
+  --{
+  --  "neovim/nvim-lspconfig",
+  --  event = { "BufReadPre", "BufNewFile" },
+  --  dependencies = {
+  --    "williamboman/mason.nvim",
+  --    "williamboman/mason-lspconfig.nvim"
+  --  },
+  --  opts = {
+  --    servers = {
+  --      lua_ls = {}
+  --    }
+  --  }
+  --}
 })
+
+---
+-- LSP setup
+---
+local lsp_zero = require('lsp-zero')
+
+lsp_zero.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp_zero.default_keymaps({buffer = bufnr})
+end)
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  handlers = {
+    lsp_zero.default_setup,
+    lua_ls = function()
+      -- (Optional) configure lua language server
+      local lua_opts = lsp_zero.nvim_lua_ls()
+      require('lspconfig').lua_ls.setup(lua_opts)
+    end,
+  }
+})
+
+---
+-- Autocompletion config
+---
+local cmp = require('cmp')
+local cmp_action = lsp_zero.cmp_action()
+
+cmp.setup({
+  mapping = cmp.mapping.preset.insert({
+    -- `Enter` key to confirm completion
+    ['<CR>'] = cmp.mapping.confirm({select = false}),
+
+    -- Ctrl+Space to trigger completion menu
+    ['<C-Space>'] = cmp.mapping.complete(),
+
+    -- Navigate between snippet placeholder
+    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+
+    -- Scroll up and down in the completion documentation
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+  })
+})
+
+vim.opt.termguicolors = true
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
