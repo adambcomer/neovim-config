@@ -22,14 +22,14 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
     },
-    config = function() 
+    config = function()
       require("neo-tree").setup()
-    end,    
+    end,
   },
-  { 
-    'rose-pine/neovim', 
-    name = 'rose-pine',     
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- load the colorscheme here
@@ -39,38 +39,39 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function () 
+    config = function()
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
         ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "typescript" },
         sync_install = false,
         highlight = { enable = true },
-        indent = { enable = true },  
+        indent = { enable = true },
       })
     end
   },
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.3',
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.3',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-      {"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files"},
-      {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find Text"},
-      {"<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers"},
-      {"<leader>fh", "<cmd>Telescope help_tabs<cr>", desc = "Find Help"}
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Find Text" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>",    desc = "Find Buffers" },
+      { "<leader>fh", "<cmd>Telescope help_tabs<cr>",  desc = "Find Help" }
     },
   },
-  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x', lazy = true, config = false},
+  { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x', lazy = true, config = false },
 
   --- Uncomment these if you want to manage LSP servers from neovim
-  {'williamboman/mason.nvim'},
-  {'williamboman/mason-lspconfig.nvim'},
+  { 'williamboman/mason.nvim' },
+  { 'williamboman/mason-lspconfig.nvim' },
 
   -- LSP Support
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      {'hrsh7th/cmp-nvim-lsp'},
+      { 'hrsh7th/cmp-nvim-lsp' },
     },
   },
 
@@ -78,53 +79,9 @@ require("lazy").setup({
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
-      {'L3MON4D3/LuaSnip'},
+      { 'L3MON4D3/LuaSnip' },
     }
   }
-  --{
-  --  "williamboman/mason.nvim",
-  --  cmd = "Mason",
-  --  keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-  --  build = ":MasonUpdate",
-  --  opts = {
-  --    ensure_installed = {
-  --      "stylua",
-  --      "lua-language-server",
-  --    },
-  --  },
-  --  ---@param opts MasonSettings | {ensure_installed: string[]}
-  --  config = function(_, opts)
-  --    require("mason").setup(opts)
-  --    local mr = require("mason-registry")
-  --    local function ensure_installed()
-  --      for _, tool in ipairs(opts.ensure_installed) do
-  --        local p = mr.get_package(tool)
-  --        if not p:is_installed() then
-  --          p:install()
-  --        end
-  --      end
-  --    end
-  --    if mr.refresh then
-  --      mr.refresh(ensure_installed)
-  --    else
-  --      ensure_installed()
-  --    end
-  --  end,
-  --},
-  --{ "williamboman/mason-lspconfig.nvim" },
-  --{
-  --  "neovim/nvim-lspconfig",
-  --  event = { "BufReadPre", "BufNewFile" },
-  --  dependencies = {
-  --    "williamboman/mason.nvim",
-  --    "williamboman/mason-lspconfig.nvim"
-  --  },
-  --  opts = {
-  --    servers = {
-  --      lua_ls = {}
-  --    }
-  --  }
-  --}
 })
 
 ---
@@ -135,7 +92,7 @@ local lsp_zero = require('lsp-zero')
 lsp_zero.on_attach(function(client, bufnr)
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
-  lsp_zero.default_keymaps({buffer = bufnr})
+  lsp_zero.default_keymaps({ buffer = bufnr })
 end)
 
 require('mason').setup({})
@@ -159,7 +116,7 @@ local cmp_action = lsp_zero.cmp_action()
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
     -- `Enter` key to confirm completion
-    ['<CR>'] = cmp.mapping.confirm({select = false}),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
     -- Ctrl+Space to trigger completion menu
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -171,6 +128,10 @@ cmp.setup({
     -- Scroll up and down in the completion documentation
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
+
+    -- SuperTab
+    ['<Tab>'] = cmp_action.luasnip_supertab(),
+    ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
   })
 })
 
@@ -190,4 +151,3 @@ vim.opt.wrap = false
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
-
