@@ -151,3 +151,6 @@ vim.opt.wrap = false
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
+
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
