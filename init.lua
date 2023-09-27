@@ -81,6 +81,19 @@ require("lazy").setup({
     dependencies = {
       { 'L3MON4D3/LuaSnip' },
     }
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+    config = true,
+    keys = {
+      { "<leader>g", "<cmd>Neogit<cr>", desc = "Open Git Window" }
+    }
   }
 })
 
