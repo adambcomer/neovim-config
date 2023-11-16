@@ -34,7 +34,7 @@ require("lazy").setup({
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "typescript", "go" },
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "html", "css", "typescript", "go", "markdown" },
         sync_install = false,
         highlight = { enable = true },
         indent = { enable = true },
@@ -52,7 +52,7 @@ require("lazy").setup({
       { "<leader>fh", "<cmd>Telescope help_tabs<cr>",  desc = "Find Help" }
     },
   },
-  { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x', lazy = true, config = false },
+  { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x',     lazy = true,    config = false },
 
   --- Uncomment these if you want to manage LSP servers from neovim
   { 'williamboman/mason.nvim' },
