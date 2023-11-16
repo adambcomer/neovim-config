@@ -26,16 +26,7 @@ require("lazy").setup({
       require("neo-tree").setup()
     end,
   },
-  {
-    'rose-pine/neovim',
-    name = 'rose-pine',
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      -- load the colorscheme here
-      vim.cmd([[colorscheme rose-pine]])
-    end,
-  },
+  { "catppuccin/nvim",                  name = "catppuccin", priority = 1000 },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -150,6 +141,8 @@ cmp.setup({
     ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
   })
 })
+
+vim.cmd.colorscheme "catppuccin-mocha"
 
 vim.opt.termguicolors = true
 

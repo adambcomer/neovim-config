@@ -1,5 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "1f4ad8bb72bdeb60975e98652636b991a9b7475d" },
+  "catppuccin": { "branch": "main", "commit": "cc717acba29259d578548973c41448b092453c52" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
   "diffview.nvim": { "branch": "main", "commit": "d38c1b5266850f77f75e006bcc26213684e1e141" },
   "fzf-lua": { "branch": "main", "commit": "03d8c35bf7b0541a877348cefc486dcd02142ec7" },
@@ -15,6 +16,5 @@
   "nvim-treesitter": { "branch": "master", "commit": "c0da2013d1cef768c00f3f0b7f365fe19a10bca3" },
   "nvim-web-devicons": { "branch": "master", "commit": "11eb26fc166742db8d1e8a6f5a7de9df37b09aae" },
   "plenary.nvim": { "branch": "master", "commit": "50012918b2fc8357b87cff2a7f7f0446e47da174" },
-  "rose-pine": { "branch": "main", "commit": "92762f4fa2144c05db760ea254f4c399a56a7ef5" },
   "telescope.nvim": { "branch": "master", "commit": "54930e1abfc94409e1bb9266e752ef8379008592" }
 }
