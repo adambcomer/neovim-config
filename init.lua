@@ -1,41 +1,29 @@
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+require('lazy').setup({
+  { 'catppuccin/nvim',          name = 'catppuccin', priority = 1000 },
   { 'nvim-lualine/lualine.nvim' },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    },
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
     config = function()
-      require("neo-tree").setup()
-    end,
-  },
-  { "catppuccin/nvim",                  name = "catppuccin", priority = 1000 },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function()
-      local configs = require("nvim-treesitter.configs")
+      local configs = require('nvim-treesitter.configs')
 
       configs.setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "html", "css", "typescript", "go", "markdown" },
+        ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'javascript', 'html', 'css', 'typescript', 'go', 'markdown' },
         sync_install = false,
         highlight = { enable = true },
         indent = { enable = true },
@@ -47,11 +35,15 @@ require("lazy").setup({
     tag = '0.1.3',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Find Text" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>",    desc = "Find Buffers" },
-      { "<leader>fh", "<cmd>Telescope help_tabs<cr>",  desc = "Find Help" }
+      { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find Files' },
+      { '<leader>fg', '<cmd>Telescope live_grep<cr>',  desc = 'Find Text' },
+      { '<leader>fb', '<cmd>Telescope buffers<cr>',    desc = 'Find Buffers' },
+      { '<leader>fh', '<cmd>Telescope help_tabs<cr>',  desc = 'Find Help' }
     },
+  },
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
   },
   { 'williamboman/mason.nvim' },
   { 'williamboman/mason-lspconfig.nvim' },
@@ -68,20 +60,20 @@ require("lazy").setup({
     }
   },
   {
-    "NeogitOrg/neogit",
+    'NeogitOrg/neogit',
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "nvim-telescope/telescope.nvim", -- optional
-      "sindrets/diffview.nvim",        -- optional
-      "ibhagwan/fzf-lua",              -- optional
+      'nvim-lua/plenary.nvim',         -- required
+      'nvim-telescope/telescope.nvim', -- optional
+      'sindrets/diffview.nvim',        -- optional
+      'ibhagwan/fzf-lua',              -- optional
     },
     config = true,
     keys = {
-      { "<leader>g", "<cmd>Neogit<cr>", desc = "Open Git Window" }
+      { '<leader>g', '<cmd>Neogit<cr>', desc = 'Open Git Window' }
     }
   },
   {
-    "lewis6991/gitsigns.nvim"
+    'lewis6991/gitsigns.nvim'
   }
 })
 
@@ -93,7 +85,7 @@ require('config.lsp')
 ---
 -- Git Signs
 ---
-require("config.gitsigns")
+require('config.gitsigns')
 
 ---
 -- Lualine
@@ -101,9 +93,21 @@ require("config.gitsigns")
 require('lualine').setup()
 
 ---
+-- Telescope
+---
+require('telescope').setup {
+  extensions = {
+    file_browser = {
+      hijack_netrw = true
+    }
+  }
+}
+require('telescope').load_extension('file_browser')
+
+---
 -- Nvim Keybindings and Config
 ---
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme 'catppuccin-mocha'
 
 vim.opt.termguicolors = true
 
@@ -130,3 +134,5 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>')
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>')
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>')
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>')
+
+vim.keymap.set('n', '<leader>fb', '<cmd>:Telescope file_browser<cr>')
