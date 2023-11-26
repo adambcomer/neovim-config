@@ -14,6 +14,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  { 'nvim-lualine/lualine.nvim' },
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -93,6 +94,11 @@ require('config.lsp')
 -- Git Signs
 ---
 require("config.gitsigns")
+
+---
+-- Lualine
+---
+require('lualine').setup()
 
 ---
 -- Nvim Keybindings and Config
