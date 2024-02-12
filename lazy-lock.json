@@ -12,8 +12,8 @@
   "mason.nvim": { "branch": "main", "commit": "c43eeb5614a09dc17c03a7fb49de2e05de203924" },
   "neogit": { "branch": "master", "commit": "536b4cfc009fc6d8bd771f010f04d48204533fae" },
   "nvim-cmp": { "branch": "main", "commit": "04e0ca376d6abdbfc8b52180f8ea236cbfddf782" },
-  "nvim-lspconfig": { "branch": "master", "commit": "41f40dc4b86f3e166cf08115f621001972565a20" },
-  "nvim-treesitter": { "branch": "master", "commit": "96f190f7a18f007b5511f5ae06b4b2fd80635340" },
+  "nvim-lspconfig": { "branch": "master", "commit": "e655c96cf00f7b783871b3787187ed3fa25ff64e" },
+  "nvim-treesitter": { "branch": "master", "commit": "10d79b5dbbdffc3edf307b189284fb62e2e79a3e" },
   "plenary.nvim": { "branch": "master", "commit": "4f71c0c4a196ceb656c824a70792f3df3ce6bb6d" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "26b5e86cb8509a3ca2ebaa652630396c8e3396b2" },
   "telescope.nvim": { "branch": "master", "commit": "54930e1abfc94409e1bb9266e752ef8379008592" }
