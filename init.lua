@@ -36,6 +36,7 @@ require("lazy").setup({
 					"go",
 					"markdown",
 					"rust",
+					"python",
 				},
 				sync_install = false,
 				highlight = { enable = true },
@@ -133,6 +134,7 @@ require("conform").setup({
 		css = { { "prettierd", "prettier" } },
 		go = { "goimports", "gofmt" },
 		c = { "clang-format" },
+		python = { "black" },
 	},
 	format_on_save = {
 		timeout_ms = 500,
