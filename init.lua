@@ -37,6 +37,7 @@ require("lazy").setup({
 					"markdown",
 					"rust",
 					"python",
+					"sql",
 				},
 				sync_install = false,
 				highlight = { enable = true },
