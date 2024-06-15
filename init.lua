@@ -38,6 +38,7 @@ require("lazy").setup({
 					"rust",
 					"python",
 					"sql",
+					"haskell",
 				},
 				sync_install = false,
 				highlight = { enable = true },
