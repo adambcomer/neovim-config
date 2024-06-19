@@ -137,6 +137,7 @@ require("conform").setup({
 		go = { "goimports", "gofmt" },
 		c = { "clang-format" },
 		python = { "black" },
+		haskell = { "ormolu" },
 	},
 	format_on_save = {
 		timeout_ms = 500,
