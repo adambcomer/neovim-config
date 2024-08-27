@@ -176,4 +176,5 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>")
 
-vim.keymap.set("n", "<leader>fb", "<cmd>:Telescope file_browser<cr>")
+vim.keymap.set("n", "<leader>fp", ":Telescope file_browser<cr>")
+vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
