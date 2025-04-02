@@ -144,6 +144,9 @@ require("conform").setup({
 		c = { "clang-format" },
 		python = { "black" },
 		haskell = { "ormolu" },
+		rust = { "rustfmt" },
+		terraform = { "terraform_fmt" },
+		hcl = { "terragrunt_hclfmt" },
 	},
 	format_on_save = {
 		timeout_ms = 1000,
