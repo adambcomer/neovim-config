@@ -27,6 +27,7 @@ require("lazy").setup({
 					"c",
 					"css",
 					"dockerfile",
+					"erlang",
 					"go",
 					"gomod",
 					"haskell",
@@ -147,6 +148,7 @@ require("conform").setup({
 		rust = { "rustfmt" },
 		terraform = { "terraform_fmt" },
 		hcl = { "terragrunt_hclfmt" },
+		erlang = { "erlfmt" },
 	},
 	format_on_save = {
 		timeout_ms = 1000,

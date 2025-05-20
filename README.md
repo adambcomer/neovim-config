@@ -31,6 +31,7 @@ Install LSPs with `:Mason`. Below are the LSPs I use for work and personal proje
 - tailwindcss-language-server
 - texlab
 - typescript-language-server
+- elp
 
 ## Update Packages
 
