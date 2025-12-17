@@ -134,6 +134,7 @@ require("telescope").load_extension("file_browser")
 -- Conform Formatter
 ---
 require("conform").setup({
+	-- log_level = vim.log.levels.DEBUG,
 	formatters_by_ft = {
 		lua = { "stylua" },
 		javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -144,7 +145,7 @@ require("conform").setup({
 		yaml = { "prettierd", "prettier", stop_after_first = true },
 		go = { "goimports", "gofmt" },
 		c = { "clang-format" },
-		python = { "black" },
+		python = { "ruff_format" },
 		haskell = { "ormolu" },
 		rust = { "rustfmt" },
 		terraform = { "terraform_fmt" },
