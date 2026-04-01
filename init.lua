@@ -18,44 +18,12 @@ require("lazy").setup({
 	{ "nvim-lualine/lualine.nvim" },
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
 		build = ":TSUpdate",
-		config = function()
-			local configs = require("nvim-treesitter.configs")
-
-			configs.setup({
-				ensure_installed = {
-					"c",
-					"css",
-					"dockerfile",
-					"erlang",
-					"go",
-					"gomod",
-					"haskell",
-					"hcl",
-					"html",
-					"javascript",
-					"lua",
-					"make",
-					"markdown",
-					"python",
-					"query",
-					"rust",
-					"sql",
-					"toml",
-					"typescript",
-					"vim",
-					"vimdoc",
-					"yaml",
-				},
-				sync_install = false,
-				highlight = { enable = true },
-				indent = { enable = true },
-			})
-		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.3",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		keys = {
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
@@ -101,6 +69,47 @@ require("lazy").setup({
 	{
 		"stevearc/conform.nvim",
 	},
+})
+
+---
+-- Treesitter features
+---
+require("nvim-treesitter").install({
+	"c",
+	"css",
+	"dockerfile",
+	"erlang",
+	"go",
+	"gomod",
+	"haskell",
+	"hcl",
+	"html",
+	"javascript",
+	"lua",
+	"make",
+	"markdown",
+	"python",
+	"query",
+	"rust",
+	"sql",
+	"toml",
+	"typescript",
+	"vim",
+	"vimdoc",
+	"yaml",
+})
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "Enable treesitter features",
+	pattern = "*",
+	callback = function()
+		pcall(vim.treesitter.start)
+		vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		vim.wo[0][0].foldmethod = "expr"
+		vim.wo[0][0].foldenable = false
+		pcall(function()
+			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		end)
+	end,
 })
 
 ---
@@ -154,7 +163,7 @@ require("conform").setup({
 	},
 	format_on_save = {
 		timeout_ms = 1000,
-		lsp_fallback = true,
+		lsp_format = "fallback",
 	},
 })
 
