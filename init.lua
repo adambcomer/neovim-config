@@ -152,6 +152,7 @@ require("conform").setup({
 		html = { "oxfmt" },
 		css = { "oxfmt" },
 		yaml = { "oxfmt" },
+		markdown = { "oxfmt" },
 		go = { "goimports", "gofmt" },
 		c = { "clang-format" },
 		python = { "ruff_format" },
